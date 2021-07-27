@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+</head>
+<body>
+    <div id="constructor">
+        <table
+            ref="tableEl"
+            cellspacing="0"
+            cellpadding="0"
+            style="
+                width:100%;
+                border-collapse:collapse;
+                border:0;
+                border-spacing:0;
+            "
+        >
+            <tbody>
+                <tr>
+                    <td
+                        style="
+                            FONT-SIZE: 10pt;
+                            FONT-FAMILY: Arial, sans-serif;
+                            COLOR: #000000;
+                            line-height: 12pt;
+                        "
+                        valign="top"
+                        colspan="2"
+                    >
+                        <p style="
+                            margin-top: 0;
+                            margin-bottom: 0;
+                            text-align: left;
+                            padding-bottom: 60px;
+                        ">
+                            <img border="0" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMQAAAAsCAMAAAANb+e2AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAflBMVEX////j9utay4cjul+R3K8+wnPI7det5MPW8uHx+/We4LkwvmlNx31105us5cN11Ju76s266s1205vy+/Vnz5Foz5ExvmnI7tc/wnOE2KWt5cO66c2f4Ll21Js/w3NMx32D2KXk9+uf4bmR3a+s5sO76c3V8uHj9+tMxn1o0JFAaOx8AAAAAWJLR0QAiAUdSAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+UHGwwBJeRgMH0AAAABb3JOVAHPoneaAAAEG0lEQVRo3u1YfXuiMAy3vGlFcHcoKJsgOtnd9/+CJ23SpqUgz3a3uXvMH3tGmib55aVNnc0e9MnEPN/3g6/24oMU+t8fROQ/QNwHfRwEi+bzaPGurZyxyYLcaVuyKQhL5SJykCnCl17sS/KWToeYcx/ZukqGgHT2Ox95sHIKRkLBKmUaRKpYSL6L1tSPIDbWXO6EiNHiL+PxfVf43VLIqCQtGHGqCgpTAEFYT1NB/Ih7q72yjNSSUXDcM7aFrmpk0t5PKrjK1GpI2Bv5l/qTTgMRuJa3melJ4o5iaG3L2RAIi1ZDGnpUTAGBGHb78rl4OVS9WFmO5IRdA69eeznkIhsDcZVD/UcjOHm9MXO626BknmkQVYB0NEAABq9AmwVsNoo/7YdG790LM2XVS5QF4pBR/QXRKzQ0tTJRicUTTb3lE6MgQMuZWj0bsRIkk342NYF3r/DZxCRwDhBog9dajWesYDKqBuJJUjECAkrybJo92yGXbV3NZMehm0drb+FOBYDYKwavUA0DvbgAHV2aqT7dAJG4MCAKvSUB3YHhZm14gJG0z2D0tNGcAl2VdXCx6nOlviWq7TgIZm0y3VGpgAg1M05bm/tusutJGjlQVgypORJ1WvSkGYmK0zCIFJzrUWE0f6rcoODaARD2XdHzDNRctW/s1MVmGc+WCuUwCHf+1QrGqFbOFURXNACitFSxPjcBLT37OwtEKfaOg4hdRnUIfEY2rHSoZMUMZeJiqXKA8KDUExuEMxPjIJgz/aRWLjpu4AVpbdkT5zebbFXSyp6yQuAkf6EnImcj9sInTML5T1t7N1iMDlX0/ohQ+dI3I59arkrT3gQQbtM64rqtVSVIu/KeeHLvX8wvnNqj90eI50lruQaDlEKV6swMgmiHM8H1dg9NCpKtLY7uhQyxKsfndaDmv25mhTkab2ycR6EkyY2N9XMESRzAWKxN3+gJ5yNA9wSztpPhAoxKH8QjIA8y4o6UUrNToOWwVEuywhGDeH10hRKSGnjP6ZSqvNK21nGUZmGWC7fBEeeei0YK8PQUS+UOtDr98BisjVcNkWxugMCjrk8b1S6hOiCg0ISxX+L/pvItggkGvvYmCEI4hTSxf4NOsxsgAp10k3QNmW3d0W/SfDYKnMJ2pGTgmqmpnJ6kWopCBr92aRwGwUitGqRrKCEplWQMq/xADOaq6ORToKIBISXveyRurY7DCd7YhWLl6s4ou6eQLmounkbyTHkur+S47RYdX2xpOuEnY7HT96JgNfgY9F6Ia6cr02vMrC4AsFcY6vhZKMi3C/VrRwOsvWOs+1eUFUXR2kX5hgx6vLUOQcImvzsNSH4V2Wf0CN3vz5gPEPdCDxD3Qvx/ADHyCHaD+MTLYTo1h6kgutl59zpF8kEPetC3pz85zkUVhCliLgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wNy0yN1QxMjowMToyMSswMDowMI6M0gEAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMDctMjdUMTI6MDE6MjErMDA6MDD/0Wq9AAAAAElFTkSuQmCC">
+                        </p>
+
+                        <p style="
+                            font-family: arial, sans-serif;
+                            font-weight: bold;
+                            font-size: 18px;
+                            margin-top: 0;
+                            margin-bottom: 0;
+                            padding-bottom: 22px;
+                        ">
+                            С уважением,
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td
+                        valign="top"
+                        style="
+                            padding-right: 24px;
+                            width: 265px;
+                        "
+                    >
+                        <p style="
+                            font-family: arial, sans-serif;
+                            font-weight: bold;
+                            font-size: 18px;
+                            margin-top: 0;
+                            margin-bottom: 0;
+                            padding-bottom: 6px;
+                        ">
+                            {{ name }}
+                        </p>
+
+                        <p style="
+                            font-family: arial, sans-serif;
+                            font-size: 15px;
+                            margin-top: 0;
+                            margin-bottom: 0;
+                            line-height: 1.3;
+                        ">
+                            {{ role }}
+                            <br>
+                            ООО «‎ДД Инвест»‎
+                        </p>
+                    </td>
+
+                    <td
+                        valign="top"
+                    >
+                        <p style="
+                            font-family: arial, sans-serif;
+                            font-weight: bold;
+                            font-size: 18px;
+                            margin-top: 0;
+                            margin-bottom: 0;
+                            padding-bottom: 6px;
+                        ">
+                            {{ phone }}
+                        </p>
+
+                        <p style="
+                            font-family: arial, sans-serif;
+                            font-weight: bold;
+                            font-size: 18px;
+                            margin-top: 0;
+                            margin-bottom: 0;
+                        ">
+                            {{ email }}
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <input type="text" v-model="name">
+        <input type="text" v-model="role">
+        <input type="text" v-model="phone">
+        <input type="text" v-model="email">
+
+        <button @click="copy">Копировать</button>
+    </div>
+
+    <script>
+        const Constructor = {
+            setup() {
+                const name = Vue.ref('Элина Гильфанова')
+                const role = Vue.ref('Менеджер по маркетингу')
+                const phone = Vue.ref('+7 911 087 56 41')
+                const email = Vue.ref('elina.gilfanova@poleinvest.ru')
+
+                const tableEl = Vue.ref(null)
+
+                function copy() {
+                    navigator.clipboard.writeText(tableEl.value.outerHTML)
+                }
+
+                return {
+                    name,
+                    role,
+                    phone,
+                    email,
+
+                    tableEl,
+                    copy
+                }
+            },
+        }
+
+        Vue.createApp(Constructor).mount('#constructor')
+    </script>
+</body>
+</html>
